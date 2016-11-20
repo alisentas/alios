@@ -9,5 +9,5 @@ void kmain(void) {
 
 	// cowsay
 	//printf(" _______\n< Ali OS >\n -------- \n        \\   ^__^\n         \\  (oo)\\_______\n            (__)\\       )\\/\\\n                ||----w |\n                ||     ||");
-	printf("%d %c", -234, 'x');
+	printf("|%d", printf("%d %c %s", -234, 'a', "sdfg"));
 }

@@ -25,6 +25,7 @@ int printf(const char *restrict format, ...){
                 int i_c = 0;
                 if(i < 0){
                     putchar('-');
+                    ++written;
                     i = 0 - i;
                     i_b = i;
                 }
@@ -32,8 +33,8 @@ int printf(const char *restrict format, ...){
                     ++i_c;
                     i /= 10;
                 }
-                --i_c;
                 written += i_c;
+                --i_c;
                 while(i_c >= 0){
                     putchar('0' + (i_b / pow(10, i_c)));
                     i_b -= (i_b / pow(10, i_c)) * pow(10, i_c);
@@ -44,6 +45,9 @@ int printf(const char *restrict format, ...){
                 putchar(va_arg(ap, int)); // char promotes to int
                 format += 2;
                 ++written;
+            }else if(format[1] == 's'){
+                written += puts(va_arg(ap, const char*)) - 1;
+                format += 2;
             }else{
                 printf("invalid format");
                 format += 2;
