@@ -9,6 +9,7 @@ void print_num(int x){
 int printf(const char *restrict format, ...){
     va_list *ap;
     va_start(ap, format);
+    int written = 0;
 
     //terminal_writestring(format);
 
@@ -17,6 +18,7 @@ int printf(const char *restrict format, ...){
             if(format[1] == '%'){
                 putchar('%');
                 format += 2;
+                ++written;
             }else if(format[1] == 'd'){ // print integer
                 int i = va_arg(ap, int);
                 int i_b = i;
@@ -31,23 +33,32 @@ int printf(const char *restrict format, ...){
                     i /= 10;
                 }
                 --i_c;
+                written += i_c;
                 while(i_c >= 0){
                     putchar('0' + (i_b / pow(10, i_c)));
                     i_b -= (i_b / pow(10, i_c)) * pow(10, i_c);
                     --i_c;
                 }
                 format += 2;
+            }else if(format[1] == 'c'){
+                putchar(va_arg(ap, int)); // char promotes to int
+                format += 2;
+                ++written;
             }else{
                 printf("invalid format");
                 format += 2;
+                written += 14;
             }
         }else{
             while(*format && *format != '%'){
                 putchar(*format);
                 ++format;
+                ++written;
             }
         }
     }
 
-    return 0;
+    va_end(ap);
+
+    return written;
 }
