@@ -17,6 +17,12 @@ int printf(const char *restrict format, ...){
                 ++written;
             }else if(format[1] == 'd'){ // print integer
                 int i = va_arg(ap, int);
+                if(i == 0){
+                    putchar('0');
+                    ++written;
+                    format += 2;
+                    continue;
+                }
                 int i_b = i;
                 int i_c = 0;
                 if(i < 0){
