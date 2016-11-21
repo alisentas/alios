@@ -31,17 +31,29 @@ void terminal_putentryat(unsigned char c, uint8_t color, size_t x, size_t y) {
 
 void terminal_putchar(unsigned char c) {
 	if(c == '\n'){
-		++terminal_row;
+		if(++terminal_row == VGA_HEIGHT){
+			scroll_terminal();
+		}
+		terminal_column = 0;
+	}else if(c == '\r'){
 		terminal_column = 0;
 	}else{
 		terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
 		if (++terminal_column == VGA_WIDTH) {
 			terminal_column = 0;
 			if (++terminal_row == VGA_HEIGHT){
-				terminal_row = 0;
+				scroll_terminal();
 			}
 		}
 	}
+}
+
+void scroll_terminal(void){
+	uint16_t i;
+	for(i = (uint16_t)VGA_WIDTH; i < (uint16_t)(VGA_WIDTH * VGA_HEIGHT); i++){
+		terminal_buffer[i - VGA_WIDTH] = terminal_buffer[i];
+	}
+	terminal_row = 24;
 }
 
 void terminal_write(const char* data, size_t size) {

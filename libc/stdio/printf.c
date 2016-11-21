@@ -2,12 +2,8 @@
 #include "stdio.h"
 #include "math.h"
 
-void print_num(int x){
-    putchar('0'+x);
-}
-
 int printf(const char *restrict format, ...){
-    va_list *ap;
+    va_list ap;
     va_start(ap, format);
     int written = 0;
 
@@ -41,11 +37,11 @@ int printf(const char *restrict format, ...){
                     --i_c;
                 }
                 format += 2;
-            }else if(format[1] == 'c'){
+            }else if(format[1] == 'c'){ // print char
                 putchar(va_arg(ap, int)); // char promotes to int
                 format += 2;
                 ++written;
-            }else if(format[1] == 's'){
+            }else if(format[1] == 's'){ // print string
                 written += puts(va_arg(ap, const char*)) - 1;
                 format += 2;
             }else{

@@ -27,8 +27,8 @@ all: prepare alios.iso
 	$(AS) $(ASFLAGS) -o $(BUILD_DIR)/$(notdir $@) $<
 
 alios.bin: $(OBJ)
-	$(AS) kernel/arch/i686/boot.s -o $(BUILD_DIR)/boot.o
-	$(LD) $(LDFLAGS) -T kernel/arch/i686/linker.ld -o alios.bin build/*.o
+	$(AS) kernel/arch/x86/boot.s -o $(BUILD_DIR)/boot.o
+	$(LD) $(LDFLAGS) -T kernel/arch/x86/linker.ld -o alios.bin build/*.o
 
 alios.iso: alios.bin
 	mkdir -p isodir/boot/grub
