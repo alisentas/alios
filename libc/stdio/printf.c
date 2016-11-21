@@ -32,8 +32,8 @@ int printf(const char *restrict format, ...){
                 written += i_c;
                 --i_c;
                 while(i_c >= 0){
-                    putchar('0' + (i_b / pow(10, i_c)));
-                    i_b -= (i_b / pow(10, i_c)) * pow(10, i_c);
+                    putchar('0' + (i_b / (int)pow(10, i_c)));
+                    i_b -= (i_b / (int)pow(10, i_c)) * (int)pow(10, i_c);
                     --i_c;
                 }
                 format += 2;

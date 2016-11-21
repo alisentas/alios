@@ -10,5 +10,9 @@ void kmain(void) {
 	// cowsay
 	//printf(" _______\n< Ali OS >\n -------- \n        \\   ^__^\n         \\  (oo)\\_______\n            (__)\\       )\\/\\\n                ||----w |\n                ||     ||");
 	//printf("|%d", printf("%d %c %s", -234, 'a', "sdfg"));
-	printf("ali\rsentas");
+	printf("PRINTF TESTS\n============\n");
+	printf("Number test: %d\n", -12345);
+	printf("Char test: %c\n", 'c');
+	printf("String test: %s\n", "test string");
+	printf("Others: %%");
 }
