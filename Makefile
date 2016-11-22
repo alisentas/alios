@@ -40,7 +40,7 @@ prepare:
 	mkdir -p ${BUILD_DIR}
 
 qemu:
-	qemu-system-x86_64 -cdrom alios.iso
+	qemu-system-i386 -cdrom alios.iso
 
 clean:
 	rm alios.bin alios.iso
