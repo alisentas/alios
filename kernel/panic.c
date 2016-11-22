@@ -1,14 +1,16 @@
-#include <stdarg.h> // for va_list
+#include "kernel.h"
+#include <stdarg.h>
 #include "stdio.h"
-#include "math.h"
 
-int printf(const char *restrict format, ...){
+void panic(const char *restrict format, ...){
     va_list ap;
     int written = 0;
+
+    printf("KERNEL PANIC! : ");
 
     va_start(ap, format);
     written = vprintf(format, ap);
     va_end(ap);
 
-    return written;
+    while(1){}
 }
