@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include "stdio.h"
 
+// this stops execution of everything
 void panic(const char *restrict format, ...){
     va_list ap;
     int written = 0;
