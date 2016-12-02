@@ -6,6 +6,7 @@ WARNINGS := -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align \
             -Wredundant-decls -Wnested-externs -Winline -Wno-long-long \
             -Wuninitialized -Wconversion -Wstrict-prototypes
 CFLAGS=-std=gnu99 -ffreestanding -O2 -fdiagnostics-color $(WARNINGS)
+ASFLAGS=--32
 LDFLAGS=-ffreestanding -O2 -nostdlib -lgcc
 ROOT_DIR=$$(pwd)
 INCLUDES=-I$(ROOT_DIR)/kernel/include -I$(ROOT_DIR)/libc/include
@@ -21,7 +22,7 @@ OBJ=$(patsubst %.c,%.o,$(SRC))
 all: prepare alios.iso
 
 %.o: %.c
-	$(CC) $(INCLUDES) -c $(CFLAGS) -o $(BUILD_DIR)/$(notdir $@) $<
+	$(CC) $(INCLUDES) -c $(CFLAGS) -o $(BUILD_DIR)/$(notdir $@) $< # $@ is output file, $< is input file
 
 %.o: %.s
 	$(AS) $(ASFLAGS) -o $(BUILD_DIR)/$(notdir $@) $<
